@@ -75,6 +75,7 @@ public class S3Dispatcher implements WebDispatcher {
     private static final String ERROR_MULTIPART_UPLOAD_DOES_NOT_EXIST = "Multipart Upload does not exist";
     private static final String ERROR_BUCKET_DOES_NOT_EXIST = "Bucket does not exist";
     private static final String PATH_DELIMITER = "/";
+    public static final char SLASH_ENCODING = (char) 0x1d;
 
     @Part
     private APILog log;
@@ -335,7 +336,7 @@ public class S3Dispatcher implements WebDispatcher {
      */
     private void readObject(WebContext ctx, String bucketName, String objectId) throws IOException {
         Bucket bucket = storage.getBucket(bucketName);
-        String id = objectId.replace('/', '_');
+        String id = objectId.replace('/', SLASH_ENCODING);
         String uploadId = ctx.get("uploadId").asString();
 
         if (!checkObjectRequest(ctx, bucket, id)) {
@@ -374,7 +375,7 @@ public class S3Dispatcher implements WebDispatcher {
     private void writeObject(WebContext ctx, String bucketName, String objectId, InputStreamHandler in)
             throws IOException {
         Bucket bucket = storage.getBucket(bucketName);
-        String id = objectId.replace('/', '_');
+        String id = objectId.replace('/', SLASH_ENCODING);
         String uploadId = ctx.get("uploadId").asString();
 
         if (!checkObjectRequest(ctx, bucket, id)) {

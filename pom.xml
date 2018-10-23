@@ -17,7 +17,7 @@
         <version>5.7</version>
     </parent>
     <artifactId>s3ninja</artifactId>
-    <version>5.0.2-SNAPSHOT</version>
+    <version>5.0.3-adbe</version>
     <packaging>jar</packaging>
     <name>s3-ninja</name>
     <description>S3 ninja emulates the S3 API for development and testing purposes.</description>
